@@ -6,9 +6,14 @@ project(CMakeIFWInstallerExample NONE)
 # Enable IFW generator
 set(CPACK_GENERATOR IFW)
 
+
 # Default Installation and Start Menu Directories
 set(CPACK_IFW_PACKAGE_START_MENU_DIRECTORY "A Package Istallation with IFW")
 set(CPACK_IFW_TARGET_DIRECTORY "@HomeDir@/${CMAKE_PROJECT_NAME}")
+
+# ICONS
+set(CPACK_IFW_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/bee.ico") #ICO
+set(CPACK_IFW_PACKAGE_WINDOW_ICON "${CMAKE_SOURCE_DIR}/bee.png") #PNG
 
 # If not set, all components will be merged in the group
 set(CPACK_COMPONENTS_GROUPING IGNORE)
@@ -36,10 +41,13 @@ foreach(sg sg1 sg2 sg3)
     install(FILES "${CMAKE_BINARY_DIR}/${sg}/${comp}.txt"
             DESTINATION ${sg}
             COMPONENT ${sg}_${comp})
+          install(FILES "${CMAKE_SOURCE_DIR}/bee.ico"
+            DESTINATION ${sg}
+            COMPONENT ${sg}_${comp})
     cpack_add_component(${sg}_${comp}
-                        DISABLED
+                        ENABLED
                         GROUP ${sg})
-    cpack_ifw_configure_component(${sg}_${comp} NAME org.foo.installer.${sg}.${comp} SCRIPT installscript_${sg}_${comp}.qs)
+    cpack_ifw_configure_component(${sg}_${comp} NAME my.ifw.installer.${sg}.${comp} SCRIPT installscript_${sg}_${comp}.qs)
   endforeach()
 
 endforeach()

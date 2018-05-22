@@ -38,7 +38,7 @@ Component.prototype.createOperations = function()
 
     if (systemInfo.productType === "windows") {
         component.addOperation("CreateShortcut", "@TargetDir@/sg2/comp2.txt", "@StartMenuDir@/sg2_comp2.lnk",
-            "workingDirectory=@TargetDir@", "iconPath=%SystemRoot%/system32/SHELL32.dll",
-            "iconId=2", "description=Open installed file");
+            "workingDirectory=@TargetDir@", "iconPath=@TargetDir@/sg2/bee.ico",
+            "iconId=0", "description=Open installed file");
     }
 }
